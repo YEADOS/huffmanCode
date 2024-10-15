@@ -37,12 +37,14 @@ std::unordered_map<char, int> getFrequency(std::string& input);
 node* constructTree(std::unordered_map<char, int> &freqTable);
 
 // Generate codes and create huffman table 
-void createCodes(node* huffmanRoot, std::string& code, std::unordered_map<char, std::string> huffmanTable);
+void createCodes(node* huffmanRoot, const std::string &code, std::unordered_map<char, std::string>& huffmanTable);
 
 // generate the encoded text using huffman table
 std::string encode(std::string inputString, std::unordered_map<char, std::string>& huffmanTable);
 // Decode the encoded text using huffman tree and encoded text
 std::string decode(node* huffmanRoot, std::string encodedText);
+
+void huffmanCode (std::string &input);
 
 
 

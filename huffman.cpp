@@ -59,7 +59,7 @@ node* constructTree(std::unordered_map<char, int>& freqTable) {
     return minPQ.top();
 }
 
-void createCodes(node* huffmanRoot, const std::string& code, std::unordered_map<char, std::string>& huffmanTable) {
+void createCodes(node* huffmanRoot, const std::string &code, std::unordered_map<char, std::string>& huffmanTable) {
 
     //
     if (huffmanRoot == NULL) {
@@ -111,34 +111,52 @@ std::string decode(node* huffmanRoot, std::string encodedText) {
     
 }
 
-int main() {
+void huffmanCode (std::string &input) {
 
+    std::unordered_map<char, int> freqTable = getFrequency(input);
 
-    // std::string name = "AABBBCCABDA";
-    // std:: string name = "BCCABBDDAECCBBAEDDCC";
-    std::string name = "Advanced Algorithms is good";
-    std::unordered_map<char, int> freqTable = getFrequency(name);
     node* root = constructTree(freqTable);
-
+    
     std::unordered_map<char, std::string> huffmanTable;
-
     createCodes(root, "", huffmanTable);
 
-    for (auto &c : freqTable) {
-        std::cout << c.first << "freq: " << c.second << std::endl; 
-    }
 
-    for (auto x : huffmanTable) {
-        std::cout << x.first << "code: " << x.second << std::endl; 
-    }
-
-    std::string encodedString = encode(name, huffmanTable);
+    std::string encodedString = encode(input, huffmanTable);
     std::cout << "Encoded Text: " << encodedString << "\n";
 
     std::string decodedString = decode(root, encodedString);
     std::cout << "Decoded Text / Original : " << decodedString << "\n";
 
-    // node *root = new node('a', 5); 
-
-
 }
+
+// int main() {
+
+
+//     // std::string name = "AABBBCCABDA";
+//     // std:: string name = "BCCABBDDAECCBBAEDDCC";
+//     std::string name = "Advanced Algorithms is good";
+//     std::unordered_map<char, int> freqTable = getFrequency(name);
+//     node* root = constructTree(freqTable);
+
+//     std::unordered_map<char, std::string> huffmanTable;
+
+//     createCodes(root, "", huffmanTable);
+
+//     for (auto &c : freqTable) {
+//         std::cout << c.first << "freq: " << c.second << std::endl; 
+//     }
+
+//     for (auto x : huffmanTable) {
+//         std::cout << x.first << "code: " << x.second << std::endl; 
+//     }
+
+//     std::string encodedString = encode(name, huffmanTable);
+//     std::cout << "Encoded Text: " << encodedString << "\n";
+
+//     std::string decodedString = decode(root, encodedString);
+//     std::cout << "Decoded Text / Original : " << decodedString << "\n";
+
+//     // node *root = new node('a', 5); 
+
+
+// }
