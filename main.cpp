@@ -1,44 +1,30 @@
+#include <gtest/gtest.h>
 #include "huffman.h"
 #include <iostream>
 #include <stdio.h>
 #include <string>
 
 
-int main() {
+TEST(Huffamn, Test1) {
+    std::string input = "BCCABBDDAECCBBAEDDCC";
+    EXPECT_EQ(input, huffmanCode(input));
+}
 
-    
-    // std::string name = "AABBBCCABDA";
-    // std:: string name = "BCCABBDDAECCBBAEDDCC";
-    std::string input = "wefhjksdhjfksafhjklsadhfjadhjkfldhjfkadfjkhdfhdjkf";
+TEST(Huffman, Test2) {
+    std::string input = "abcdefghijklmnopqrstuvwxyz";
+    EXPECT_EQ(input, huffmanCode(input));
+}
 
-    huffmanCode(input);
+TEST(Huffman, Test3) {
+    std::string input = "The output from Huffman's algorithm can be viewed as a variable-length code table for encoding a source symbol (such as a character in a file). The algorithm derives this table from the estimated probability or frequency of occurrence (weight) for each possible value of the source symbol. As in other entropy encoding methods, more common symbols are generally represented using fewer bits than less common symbols. Huffman's method can be efficiently implemented, finding a code in time linear to the number of input weights if these weights are sorted.[2] However, although optimal among methods encoding symbols separately, Huffman coding is not always optimal among all compression methods - it is replaced with arithmetic coding[3] or asymmetric numeral systems[4] if a better compression ratio is required.";
+    EXPECT_EQ(input, huffmanCode(input));
+}
 
-    // std::unordered_map<char, int> freqTable = getFrequency(name);
-    // node* root = constructTree(freqTable);
 
-    // std::unordered_map<char, std::string> huffmanTable;
-
-    // // const std::string code = "adfasd";
-    // createCodes(root, "", huffmanTable);
-
-    // for (auto &c : freqTable) {
-    //     std::cout << c.first << "freq: " << c.second << std::endl; 
-    // }
-
-    // for (auto x : huffmanTable) {
-    //     std::cout << x.first << "code: " << x.second << std::endl; 
-    // }
-
-    // std::string encodedString = encode(name, huffmanTable);
-    // std::cout << "Encoded Text: " << encodedString << "\n";
-
-    // std::string decodedString = decode(root, encodedString);
-    // std::cout << "Decoded Text / Original : " << decodedString << "\n";
-
-    // node *root = new node('a', 5); 
-
-    return 0;
-
+int main(int argc, char **argv) {
+  
+    ::testing::InitGoogleTest(&argc, argv);    
+    return RUN_ALL_TESTS();
 
 }
 

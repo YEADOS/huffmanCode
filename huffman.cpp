@@ -37,16 +37,12 @@ node* constructTree(std::unordered_map<char, int>& freqTable) {
 
     while(minPQ.size() > 1) {
 
-        // The remaining node is the root node of the tree. 
-        // if (minPQ.size() == 1) {
-        //     return minPQ.top();
-        // }
-
         node* first = minPQ.top();
-        std::cout << "first: " << first->count;
+        // std::cout << "first: " << first->count;
         minPQ.pop();
+
         node* second = minPQ.top();
-        std::cout << " --- second: " << second->count << "\n";
+        // std::cout << " --- second: " << second->count << "\n";
         minPQ.pop();
 
         // Create 
@@ -111,7 +107,7 @@ std::string decode(node* huffmanRoot, std::string encodedText) {
     
 }
 
-void huffmanCode (std::string &input) {
+std::string huffmanCode(std::string &input) {
 
     std::unordered_map<char, int> freqTable = getFrequency(input);
 
@@ -122,10 +118,20 @@ void huffmanCode (std::string &input) {
 
 
     std::string encodedString = encode(input, huffmanTable);
-    std::cout << "Encoded Text: " << encodedString << "\n";
-
     std::string decodedString = decode(root, encodedString);
-    std::cout << "Decoded Text / Original : " << decodedString << "\n";
+
+    // for (auto &c : freqTable) {
+    //     std::cout << c.first << "freq: " << c.second << std::endl; 
+    // }
+
+    // for (auto x : huffmanTable) {
+    //     std::cout << x.first << "code: " << x.second << std::endl; 
+    // }
+    
+    // std::cout << "Encoded Text: " << encodedString << "\n";
+    // std::cout << "Decoded Text: " << decodedString << "\n";
+
+    return decodedString;
 
 }
 
