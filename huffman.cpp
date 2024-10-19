@@ -7,6 +7,7 @@
 #include <sstream>
 
 bool isLeaf(node* huffmanRoot) {
+    // If the node has no children, it is a leaf node
     if (huffmanRoot->left == NULL && huffmanRoot->right == NULL) {
         return true;
     }
@@ -14,19 +15,17 @@ bool isLeaf(node* huffmanRoot) {
 }
 
 std::unordered_map<char, int> getFrequency(std::string& input) {
-
+    // Count the frequency of each character in the input and store in the frequency table
     std::unordered_map<char, int> freqTable; 
-    
     for(int i = 0; i < input.size(); i++) {
         freqTable[input[i]]++;
     }
-
     return freqTable;
-
 }
 
 node* constructTree(std::unordered_map<char, int>& freqTable) {
-
+    // Create a priority queue to store the nodes
+    // Greedy approach to select the two nodes with the lowest frequency
     std::priority_queue<node*, std::vector<node*>, MinComparator> minPQ;
     
 
@@ -37,13 +36,10 @@ node* constructTree(std::unordered_map<char, int>& freqTable) {
     }
 
     while(minPQ.size() > 1) {
-
         node* first = minPQ.top();
-        // std::cout << "first: " << first->count;
         minPQ.pop();
 
         node* second = minPQ.top();
-        // std::cout << " --- second: " << second->count << "\n";
         minPQ.pop();
 
         // Create 
@@ -52,21 +48,20 @@ node* constructTree(std::unordered_map<char, int>& freqTable) {
 
         minPQ.push(newNode);
     }
-
     return minPQ.top();
 }
 
 void createCodes(node* huffmanRoot, const std::string &code, std::unordered_map<char, std::string>& huffmanTable) {
 
-    //
+    // traverse the tree recursively creating the unique code for each character
     if (huffmanRoot == NULL) {
         return;
     }
-
+    // once a leaf node is reached, add the character and its code to the huffman table S
     if (isLeaf(huffmanRoot)) {
         huffmanTable[huffmanRoot->data] = code;
     }
-
+    // Traverse left and right and add 0 and 1 to the code respectively
     createCodes(huffmanRoot->left, code + "0", huffmanTable);
     createCodes(huffmanRoot->right, code + "1", huffmanTable);
 
@@ -74,12 +69,11 @@ void createCodes(node* huffmanRoot, const std::string &code, std::unordered_map<
 
 std::string encode(std::string inputString, std::unordered_map<char, std::string>& huffmanTable) {
 
+    // For each character in the input string, replace it with the corresponding huffman code
     std::string encodedString = "";
-
     for (char c : inputString) {
         encodedString += huffmanTable[c];
     }
-
     return encodedString;
 }
 
@@ -87,56 +81,55 @@ std::string decode(node* huffmanRoot, std::string encodedText) {
 
     std::string decodedText = "";
     node* current = huffmanRoot;
-
-
     // If the tree is a single node
     if (isLeaf(current)) {
         for(int i = 0; i < encodedText.length(); i++) {
             decodedText += current->data;
-            
         }
         return decodedText;
     }
 
-    // If the tree has more than one node
+    // If the tree has more than one node 
     for (char bit : encodedText) {
         // if the bit is 0, traverse left
         if (bit == '0') {
             current = current->left;
         }
-
         // if the bit is 1, traverse right
         if (bit == '1') {
             current = current->right;
         }
-
         // if the current node is a leaf, add the character to the decoded text 
         if (isLeaf(current)) {
             decodedText += current->data;
             current = huffmanRoot;
         }
-
     }
     return decodedText;
-    
 }
 
+// return the bit size of the input text (8 bits per character ASCII) 
 double originalBitSize(std::string input) {
     return input.size() * 8;
 }
 
+// return the bit size of the compressed text
 double compressedbitSize(std::unordered_map<char, int> freqTable, std::unordered_map<char, std::string> huffmanTable) {
+    
+    // size is the sum of the message size and the table size
     int messageSize = 0;
     int tableSize = 0;
+
+    // for each character in the frequency table, calculate the size of the message and table
     for (auto &leafNode : freqTable) {
         char character = leafNode.first;
         int frequency = leafNode.second;
 
         int bitLength = huffmanTable[character].length();
-        messageSize += frequency * bitLength;
-        tableSize += 8 + bitLength;
+        messageSize += frequency * bitLength; // message size is the frequency of the character multiplied by the bit length of the character
+        tableSize += 8 + bitLength; // table size is the size of the character (8 bits - ASCII) and the bit length of the character
     }
-    
+    // return the total size of the message and table
     return messageSize + tableSize;
 }
 

@@ -2,11 +2,13 @@
 #define HUFFMAN_H
 
 #include <string>
+#include <iostream>
 #include <unordered_map>
 #include <vector>
 #include <queue>
 #include <sstream>
 
+// Node structure for the huffman tree
 struct node {
     char data;
     int count;
@@ -25,10 +27,9 @@ struct MinComparator
     bool operator()(node* left, node* right) {
         return left->count > right->count;
     }
-
 };
 
-
+// Function to check if the node is a leaf node
 bool isLeaf(node* huffmanRoot);
 
 // Function to get a frequency of character in input text
@@ -45,10 +46,7 @@ std::string encode(std::string inputString, std::unordered_map<char, std::string
 // Decode the encoded text using huffman tree and encoded text
 std::string decode(node* huffmanRoot, std::string encodedText);
 
+// Main function to generate huffman code
 std::string huffmanCode (std::string &input);
-
-
-
-
 
 #endif // HUFFMAN
