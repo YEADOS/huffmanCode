@@ -20,6 +20,18 @@ TEST(Huffman, Test3) {
     EXPECT_EQ(input, huffmanCode(input));
 }
 
+TEST(Huffam, Test4_SpecialCharacters) {
+    std::string input = "!>@:{:#}?--}+~(*&&?],{-)/@!+^:\"&*):!=(?:/#&([\"@.`%=@-@^,-%#&=<!^'=,}\"_]$<,!])];|>/[={'!,>&$^$?.$''$|:>>!?[=:%/'{-\"(-<#=+;\"_\">{~(*#;[~:|?#}:#&:,?@~#>;>@(/;&*`:%#?\\)/<%~])!~#<??%|_,=";
+
+    // std::string input = "!>@:{:#}?--}+~(*&&?],{-)/@!+^:"&*):!=(?:/#&(["@.`%=@-@^,-%#&=<!^'=,}"_]$<,!])];|>/[={'!,>&$^$?.$''$|:>>!?[=:%/'{-"(-<"#=+;"_">{~(*#;[~:|?#}:#&:,?@~#>;>@(/;&*`:%#?\\)/<%~])!~#<??%|_,=";
+    EXPECT_EQ(input, huffmanCode(input));
+}
+
+TEST(Huffman, Test5_ASCII) {
+    std::string input = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+    EXPECT_EQ(input, huffmanCode(input));
+}
+
 
 int main(int argc, char **argv) {
   

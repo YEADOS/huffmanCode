@@ -128,7 +128,7 @@ std::string huffmanCode(std::string &input) {
     //     std::cout << x.first << "code: " << x.second << std::endl; 
     // }
     
-    // std::cout << "Encoded Text: " << encodedString << "\n";
+    std::cout << "Encoded Text Size: " << encodedString.length() << "\n";
     // std::cout << "Decoded Text: " << decodedString << "\n";
 
     return decodedString;
