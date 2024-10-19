@@ -10,7 +10,7 @@ TEST(Huffamn, Test1) {
     EXPECT_EQ(input, huffmanCode(input));
 }
 
-TEST(Huffman, Test2) {
+TEST(Huffman, Test2_LowerCaseAlphabet) {
     std::string input = "abcdefghijklmnopqrstuvwxyz";
     EXPECT_EQ(input, huffmanCode(input));
 }
@@ -20,7 +20,7 @@ TEST(Huffman, Test3) {
     EXPECT_EQ(input, huffmanCode(input));
 }
 
-TEST(Huffam, Test4_SpecialCharacters) {
+TEST(Huffman, Test4_SpecialCharacters) {
     std::string input = "!>@:{:#}?--}+~(*&&?],{-)/@!+^:\"&*):!=(?:/#&([\"@.`%=@-@^,-%#&=<!^'=,}\"_]$<,!])];|>/[={'!,>&$^$?.$''$|:>>!?[=:%/'{-\"(-<#=+;\"_\">{~(*#;[~:|?#}:#&:,?@~#>;>@(/;&*`:%#?\\)/<%~])!~#<??%|_,=";
 
     // std::string input = "!>@:{:#}?--}+~(*&&?],{-)/@!+^:"&*):!=(?:/#&(["@.`%=@-@^,-%#&=<!^'=,}"_]$<,!])];|>/[={'!,>&$^$?.$''$|:>>!?[=:%/'{-"(-<"#=+;"_">{~(*#;[~:|?#}:#&:,?@~#>;>@(/;&*`:%#?\\)/<%~])!~#<??%|_,=";
@@ -28,9 +28,42 @@ TEST(Huffam, Test4_SpecialCharacters) {
 }
 
 TEST(Huffman, Test5_ASCII) {
+
     std::string input = " !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
     EXPECT_EQ(input, huffmanCode(input));
 }
+
+TEST(Huffman, Test6_SingleCharacter) {
+    std::string input = "w";
+    EXPECT_EQ(input, huffmanCode(input));
+}
+
+TEST(Huffman, Test7_SingleCharacterString) {
+    std::string input = "zzzzzzzzzzzzzzzzzzz";
+    EXPECT_EQ(input, huffmanCode(input));
+}
+
+TEST(Huffman, Test8_LargeInput) {
+    std::string input(1000000, 'a');
+    EXPECT_EQ(input, huffmanCode(input));
+}
+
+TEST(Huffman, Test9_EmptyString) {
+    std::string input = "";
+    EXPECT_EQ(input, huffmanCode(input));
+}
+
+TEST(Huffman, Test10_WhiteSpace) {
+    std::string input = " ";
+    EXPECT_EQ(input, huffmanCode(input));
+}
+
+// TEST(Huffman, Test11_NonASCII) {
+//     std::string input = u8"你好, мир, 안녕하세요,こんにちは, مرحبا";
+//     EXPECT_EQ(input, huffmanCode(input));
+// }
+
+
 
 
 int main(int argc, char **argv) {

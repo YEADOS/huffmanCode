@@ -53,6 +53,7 @@
         "optional": "cpp",
         "iomanip": "cpp",
         "sstream": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "cstring": "cpp"
     }
 }
